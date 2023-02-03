@@ -18,7 +18,7 @@ fun convertUnit(userInput: String) {
         return
     }
 
-    val inputUnit = Unit.values().find { unit -> input[1] in unit.symbols.map { symbol -> symbol.lowercase() } }
+    val inputUnit = Unit.values().find { unit -> input[1] in unit.symbols }
 
     if (inputUnit != null) {
         if (inputValue < 0 && inputUnit.type in listOf(UnitType.Weight, UnitType.Length)) {
@@ -27,7 +27,7 @@ fun convertUnit(userInput: String) {
         }
     }
 
-    val targetUnit = Unit.values().find { unit -> input[3] in unit.symbols.map { symbol -> symbol.lowercase() } }
+    val targetUnit = Unit.values().find { unit -> input[3] in unit.symbols }
 
     val units = listOf(inputUnit, targetUnit)
 
