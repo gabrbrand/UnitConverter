@@ -45,8 +45,8 @@ fun convertUnit(userInput: String) {
 
 enum class Unit(
     val names: List<String>,
-    private val conversionRate: Double = 0.0,
-    val type: UnitType,
+    private val conversionRate: Double? = null,
+    val type: UnitType
 ) {
     // Length units
     Meters(
@@ -132,7 +132,7 @@ enum class Unit(
     );
 
     fun convertLengthOrWeight(inputValue: Double, targetUnit: Unit) =
-        inputValue * this.conversionRate / targetUnit.conversionRate
+        inputValue * this.conversionRate!! / targetUnit.conversionRate!!
 
     fun convertTemperature(inputValue: Double, targetUnit: Unit) = when (targetUnit) {
         Celsius -> when (this) {
@@ -153,7 +153,7 @@ enum class Unit(
             else -> inputValue
         }
 
-        else -> 0.0
+        else -> error("Conversion impossible")
     }
 
     private val singular = names[names.lastIndex - 1]
